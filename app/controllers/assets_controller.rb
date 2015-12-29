@@ -30,18 +30,16 @@ class AssetsController < ApplicationController
     
     # If a category mapping exists
     if(!@mapping['category'].nil?)
-      @assets   = Attachment.find(:all, {
-        :conditions => conditions, 
-        :joins      => joins.join(' '),
-        :order      => "#{@mapping['category']['name']} ASC, attachments.filename ASC"})
+
+      @assets   = Attachment.order("#{@mapping['category']['name']} ASC, attachments.filename ASC")
+          .joins(joins.join(' '))
+          .where(conditions).all()
 
     # If a category mapping doesnt exist
     else
-      @assets   = Attachment.find(:all, {
-        :conditions => conditions, 
-        :joins      => joins.join(' '),
-        :order      => "attachments.filename ASC"})
-        
+      @assets   = Attachment.order("attachments.filename ASC")
+          .joins(joins.join(' '))
+          .where(conditions).all()
     end
   end
 
@@ -61,7 +59,8 @@ class AssetsController < ApplicationController
        wheres << "(#{mapping['project_id']} = #{@project.id})"
      end
 
-     return Attachment.find(:all, {:select => "container_type", :group => "container_type", :conditions => wheres.join(' OR '), :joins => joins.join(' ')}).collect(&:container_type).compact
+     return Attachment.select("container_type").group("container_type").joins(joins.join(' '))
+         .where(wheres.join(' OR ')).collect(&:container_type).compact
   end
  
   def find_project
