@@ -100,4 +100,17 @@ class AssetsController < ApplicationController
     find_project
     super
   end
+
+  def get_collapsable(args, text)
+    html_id = "collapse-#{Redmine::Utils.random_hex(4)}"
+    html_id
+    #show_label = args[0] || l(:button_show)
+    #hide_label = args[1] || args[0] || l(:button_hide)
+    #js = "$('##{html_id}-show, ##{html_id}-hide').toggle(); $('##{html_id}').fadeToggle(150);"
+    #out = ''.html_safe
+    #out << link_to_function(show_label, js, :id => "#{html_id}-show", :class => 'collapsible collapsed')
+    #out << link_to_function(hide_label, js, :id => "#{html_id}-hide", :class => 'collapsible', :style => 'display:none;')
+    #out << content_tag('div', textilizable(text, :object => obj, :headings => false), :id => html_id, :class => 'collapsed-text', :style => 'display:none;')
+    #out
+  end
 end
