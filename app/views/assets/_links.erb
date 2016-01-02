@@ -7,22 +7,23 @@
   <% if category_relation %>
     <% category = eval "attachment.container.#{category_relation}" %>
     <% if(current_category != category) %>
+        <% if current_cateogry != nil %>
+            <%= end_collapsable %>
+        <% end %>
       <h3><%= category %></h3>
       <% current_category = category %>
+      <%= start_collapsable %>
     <% end %>
   <% end %>
 
   <p>
   <% if attachment.thumbnailable? %>
-      <%= link_to image_tag(url_for({:controller => 'attachments',
-                                     :action => 'show',
-                                     :id => attachment,
-                                     :filename => attachment.filename }), :width => '100'),
-                                    {:controller => 'attachments', :action => 'show',
-                                     :id => attachment,
-                                     :filename => attachment.filename
-                                    }, :class => 'lightbox', :rel => 'attachments',
-                                    :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
+      <%=
+        link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
+        {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename},
+        :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }", :data  => {:fancybox_type => 'iframe'}
+      %>
+
   <% end %>
   <%= link_to_attachment attachment %>
 
