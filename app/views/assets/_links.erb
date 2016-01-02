@@ -17,8 +17,8 @@
       <%=
         link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
         {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename},
-        :class => 'lightbox', :rel => 'attachments', :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }", :data  => {:fancybox_type => 'iframe'}
-      %>
+         :class => 'lightbox', :rel => 'attachments',
+                        :title => "#{attachment.filename}#{ ('-' + attachment.description) unless attachment.description.blank? }" %>
 
   <%else%>
       <%= link_to image_tag("files/icon#{File.extname(attachment.filename)}.png", :plugin => :redmine_assets_plugin) %>
