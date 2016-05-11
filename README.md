@@ -15,6 +15,7 @@ Requirements
 ------------
 
 * Rails 3
+* LightBox Plugin
 
 Installation 
 ------------
