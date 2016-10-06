@@ -1,4 +1,5 @@
 require 'redmine'
+require 'jquery-infinite-pages'
 
 Dir[File.join(File.dirname(__FILE__),'vendor','plugins','*')].each do |dir|
   path = File.join(dir, 'lib')

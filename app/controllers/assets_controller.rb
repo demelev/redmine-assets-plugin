@@ -33,15 +33,15 @@ class AssetsController < ApplicationController
     # If a category mapping exists
     if(!@mapping['category'].nil?)
 
-      @assets   = Attachment.order("#{@mapping['category']['name']} ASC, attachments.filename ASC")
+      @assets   = Attachment.order("#{@mapping['category']['name']} ASC, attachments.created_on DESC")
           .joins(joins.join(' '))
-          .where(conditions).all()
+          .where(conditions).page(params[:page])
 
     # If a category mapping doesnt exist
     else
-      @assets   = Attachment.order("attachments.filename ASC")
+      @assets   = Attachment.order("attachments.created_on DESC")
           .joins(joins.join(' '))
-          .where(conditions).all()
+          .where(conditions).page(params[:page])
     end
   end
 

@@ -2,7 +2,6 @@
   <%= current_category = nil %>
 <% end %>
 
-<div class="attachments thumbnails images">
 <% for attachment in attachments %>
   <% if category_relation %>
     <% category = eval "attachment.container.#{category_relation}" %>
@@ -12,7 +11,8 @@
     <% end %>
   <% end %>
 
-  <p>
+  <tr>
+      <td>
   <% if attachment.thumbnailable? %>
       <%=
         link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
@@ -45,13 +45,13 @@
   <% if options[:deletable] %>
     <%= link_to image_tag('delete.png'), {:controller => 'attachments', :action => 'destroy', :id => attachment},
                                          :confirm => l(:text_are_you_sure),
-                                         :method => :delete,
+                                         :methd => :delete,
                                          :class => 'delete',
                                          :title => l(:button_delete) %>
   <% end %>
   <% if options[:author] %>
     <span class="author"><%= attachment.author %>, <%= format_time(attachment.created_on) %></span>
   <% end %>
-  </p>
+  </td>
+  </tr>
 <% end %>
-</div>

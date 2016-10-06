@@ -1,0 +1,4 @@
+// Append new data
+$("<%=j render(:partial => 'links', :locals => {:attachments => @assets, :options => @options, :category_relation => @mapping['category'].nil? ? nil : @mapping['category']['relation']} %>")
+  .appendTo($(".infinite-table table"));
+console.log("Hello from the hell");
